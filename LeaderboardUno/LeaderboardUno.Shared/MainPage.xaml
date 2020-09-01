@@ -7,17 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:LeaderboardUno.Shared.Models"
     mc:Ignorable="d"
-    Loaded="Page_Loaded"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Loaded="Page_Loaded">
 
-    <Grid>
-        <NavigationView 
-            Name="NavView" 
-            PaneTitle="Games" 
-            PaneDisplayMode="Auto" 
-            ItemInvoked="NavView_ItemInvoked"
-            IsSettingsVisible="False"
-            MenuItemsSource="{x:Bind games}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <NavigationView Name="NavView" PaneTitle="Games" PaneDisplayMode="Auto" ItemInvoked="NavView_ItemInvoked" IsSettingsVisible="False" MenuItemsSource="{x:Bind games}">
             <NavigationView.MenuItemTemplate>
                 <DataTemplate x:DataType="data:Game">
                     <NavigationViewItem Tag="{x:Bind id}" Content="{x:Bind GameName}" Icon="Play"/>
@@ -25,13 +18,6 @@
             </NavigationView.MenuItemTemplate>
             <Frame Name="ContentFrame" Margin="0,20,0,0"/>
         </NavigationView>
-        <Button 
-            Click="Button_Click"
-            FontFamily="Segoe MDL2 Assets" 
-            Content="&#xE72C;" 
-            VerticalAlignment="Bottom" 
-            Margin="0,0,0,7" 
-            Background="Transparent"/>
+        <Button Click="Button_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;" VerticalAlignment="Bottom" Margin="0,0,0,7" Background="Transparent"/>
     </Grid>
-  
 </Page>
