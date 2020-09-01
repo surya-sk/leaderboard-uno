@@ -42,6 +42,7 @@
                 <Button x:Name="CreateGameButton" Content="Next" Click="CreateGameButton_Click"/>
             </StackPanel>
             <StackPanel x:Name="InputPanel" Visibility="Collapsed">
+                <TextBlock x:Name="GameNameTextBox" Text="Enter player names for "/>
                 <ListView ItemsSource="{x:Bind PlayerStats}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="data:PlayerStat">
@@ -49,6 +50,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button x:Name="ActualCreateGameButton" Content="Create Game" Click="ActualCreateGameButton_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

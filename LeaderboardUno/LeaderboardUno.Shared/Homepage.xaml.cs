@@ -59,12 +59,20 @@ namespace LeaderboardUno.Shared
             //GameDetPanel.Visibility = Visibility.Collapsed;
         }
 
-        private async void InputPlayers()
+        private void InputPlayers()
         {
             GameDetPanel.Visibility = Visibility.Collapsed;
+            GameNameTextBox.Text += GameName;
             InputPanel.Visibility = Visibility.Visible;
         }
 
+        private void ActualCreateGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            Game game = new Game() { id = Guid.NewGuid(), GameName = GameName, GameType = Type, NumPlayers = Num, PlayerStatList = PlayerStats };
+            Profile.GetInstance().AddGame(game);
+            InputPanel.Visibility = Visibility.Collapsed;
+            InputGame.Visibility = Visibility.Visible;
+        }
 
         private void CreatePlayerStats()
         {
