@@ -24,11 +24,14 @@ namespace LeaderboardUno.Shared
     /// </summary>
     public sealed partial class Homepage : Page
     {
-       
+        string GameName, Type;
+        double Num;
+        private ObservableCollection<PlayerStat> PlayerStats;
+        private ObservableCollection<Game> games;
         public Homepage()
         {
             this.InitializeComponent();
-            
+            PlayerStats = PlayerStatList.GetPlayerStats();
         }
 
         private void InputGame_Click(object sender, RoutedEventArgs e)
@@ -40,20 +43,28 @@ namespace LeaderboardUno.Shared
         private void GameType_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton rb = sender as RadioButton;
+            Type = rb.Name;
         }
 
         private void CreateGameButton_Click(object sender, RoutedEventArgs e)
         {
-            //GameName = NameInput.Text;
-            //Type = GameType.SelectedItem.ToString();
-            //string temp = NumInput.Text;
-            //Num = Convert.ToDouble(temp);
-            //CreatePlayerStats();
+            GameName = NameInput.Text;
+            string temp = NumInput.Text;
+            Num = Convert.ToDouble(temp);
+            CreatePlayerStats();
             //InputPlayers();
             //this.Frame.Navigate(typeof(Homepage));
             //this.Frame.Navigate(typeof(Leaderboard));
             GameDetPanel.Visibility = Visibility.Collapsed;
         }
+        private void CreatePlayerStats()
+        {
+            for (int i = 0; i < Num; i++)
+            {
+                PlayerStats.Add(new PlayerStat { PlayerName = "", PlayerScore = 0 });
+            }
+        }
+
 
         private void NumInput_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {

@@ -42,5 +42,7 @@
                 <Button x:Name="CreateGameButton" Content="Submit" Click="CreateGameButton_Click"/>
             </StackPanel>
         </StackPanel>
+
+        
     </Grid>
 </Page>
