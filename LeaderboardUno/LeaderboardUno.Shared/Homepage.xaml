@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="LeaderboardUno.Shared.Homepage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeaderboardUno.Shared"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            x:Name="HomePanel" 
+            Orientation="Vertical"
+            Margin="20,0,0,0"
+            Spacing="20">
+            <TextBlock Text="Leaderboard" FontSize="56"/>
+            <TextBlock Text="Welcome to Leaderboard- A Board Game Companion. Click 'Add Game' below to add a new game." 
+                       TextWrapping="Wrap"/>
+            <TextBlock Text="The games you've added will appear in the navigtion bar. Press the hamburger menu to access it if the windows width is small." 
+                       TextWrapping="Wrap"/>
+            <Button x:Name="InputGame" Click="InputGame_Click">
+                <RelativePanel>
+                    <FontIcon x:Name="AddIcon" Glyph="&#xE710;"/>
+                    <TextBlock Text="Add Game" RelativePanel.RightOf="AddIcon" />
+                </RelativePanel>
+            </Button>
+            <StackPanel x:Name="GameDetPanel" 
+                        Orientation="Vertical"
+                        Visibility="Collapsed"
+                        Spacing="30">
+                <TextBox x:Name="NameInput" PlaceholderText="Enter Game Name" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel x:Name="GameType" Spacing="10">
+                    <TextBlock x:Name="Title" Text="Choose game type: "/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="Leaderboard" Content="Leaderboard" GroupName="GameType" Checked="RadioButtonChecked"/>
+                        <RadioButton x:Name="Elimiator" Content="Eliminator" GroupName="GameType" Checked="RadioButtonChecked"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
