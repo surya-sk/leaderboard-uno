@@ -5,7 +5,7 @@
     xmlns:local="using:LeaderboardUno.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
+    xmlns:data="using:LeaderboardUno.Shared.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -43,7 +43,27 @@
                         <RadioButton x:Name="Elimiator" Content="Eliminator" GroupName="GameType" Checked="RadioButtonChecked"/>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="30">
+                    <TextBlock Text="Number of players: " FontSize="28"/>
+                    <TextBox x:Name="NumInput" BeforeTextChanging="NumInput_Validate"/>
+                </StackPanel>
+                <Button x:Name="CreateGameButton" Content="Submit" Click="CreateGameButton_Click"/>
             </StackPanel>
         </StackPanel>
+
+        <ContentDialog Title="Enter Player Names" x:Name="NamesDialog" PrimaryButtonText="Save" PrimaryButtonClick="NamesDialog_PrimaryButtonClick" CloseButtonText="Cancel">
+            <ListView ItemsSource="{x:Bind PlayerStats}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:PlayerStat">
+                        <TextBox PlaceholderText="Enter name" Text="{x:Bind PlayerName, Mode=TwoWay}" Width="250"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ContentDialog>
+
+        <CommandBar Grid.Row="1">
+            <AppBarButton x:Name="SettingsButton" Label="Settings" Icon="Setting" Click="SettingsButton_Click"/>
+            <AppBarButton x:Name="HelpButton" Label="Help" Icon="Help" Click="HelpButton_Click"/>
+        </CommandBar>
     </Grid>
 </Page>
