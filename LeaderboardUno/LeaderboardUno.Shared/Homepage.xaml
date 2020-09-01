@@ -39,10 +39,17 @@
                     <TextBlock Text="Number of players: " FontSize="28"/>
                     <TextBox x:Name="NumInput" BeforeTextChanging="NumInput_BeforeTextChanging" />
                 </StackPanel>
-                <Button x:Name="CreateGameButton" Content="Submit" Click="CreateGameButton_Click"/>
+                <Button x:Name="CreateGameButton" Content="Next" Click="CreateGameButton_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="InputPanel" Visibility="Collapsed">
+                <ListView ItemsSource="{x:Bind PlayerStats}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:PlayerStat">
+                            <TextBox PlaceholderText="Enter name" Text="{x:Bind PlayerName, Mode=TwoWay}" Width="250"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </StackPanel>
-
-        
     </Grid>
 </Page>

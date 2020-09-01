@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Markup;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -52,11 +53,19 @@ namespace LeaderboardUno.Shared
             string temp = NumInput.Text;
             Num = Convert.ToDouble(temp);
             CreatePlayerStats();
-            //InputPlayers();
+            InputPlayers();
             //this.Frame.Navigate(typeof(Homepage));
             //this.Frame.Navigate(typeof(Leaderboard));
-            GameDetPanel.Visibility = Visibility.Collapsed;
+            //GameDetPanel.Visibility = Visibility.Collapsed;
         }
+
+        private async void InputPlayers()
+        {
+            GameDetPanel.Visibility = Visibility.Collapsed;
+            InputPanel.Visibility = Visibility.Visible;
+        }
+
+
         private void CreatePlayerStats()
         {
             for (int i = 0; i < Num; i++)
