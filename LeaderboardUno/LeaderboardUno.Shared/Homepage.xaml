@@ -15,55 +15,32 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel
-            x:Name="HomePanel" 
-            Orientation="Vertical"
-            Margin="20,0,0,0"
-            Spacing="20">
+        <StackPanel x:Name="HomePanel" Orientation="Vertical" Spacing="20" Margin="20,0,0,0">
             <TextBlock Text="Leaderboard" FontSize="56"/>
-            <TextBlock Text="Welcome to Leaderboard- A Board Game Companion. Click 'Add Game' below to add a new game." 
-                       TextWrapping="Wrap"/>
-            <TextBlock Text="The games you've added will appear in the navigtion bar. Press the hamburger menu to access it if the windows width is small." 
-                       TextWrapping="Wrap"/>
+            <TextBlock Text="Welcome to Leaderboard- A Board Game Companion. Click 'Add Game' below to add a new game." TextWrapping="Wrap"/>
+            <TextBlock Text="The games you've added will appear in the navigtion bar. Press the hamburger menu to access it if the windows width is small." TextWrapping="Wrap"/>
             <Button x:Name="InputGame" Click="InputGame_Click">
                 <RelativePanel>
                     <FontIcon x:Name="AddIcon" Glyph="&#xE710;"/>
-                    <TextBlock Text="Add Game" RelativePanel.RightOf="AddIcon" />
+                    <TextBlock Text=" Add Game" RelativePanel.RightOf="AddIcon" />
                 </RelativePanel>
             </Button>
-            <StackPanel x:Name="GameDetPanel" 
-                        Orientation="Vertical"
-                        Visibility="Collapsed"
-                        Spacing="30">
-                <TextBox x:Name="NameInput" PlaceholderText="Enter Game Name" Width="200" HorizontalAlignment="Left"/>
-                <StackPanel x:Name="GameType" Spacing="10">
-                    <TextBlock x:Name="Title" Text="Choose game type: "/>
+
+            <StackPanel x:Name="GameDetPanel" Orientation="Vertical" Visibility="Collapsed" Spacing="30">
+                <TextBox Name="NameInput" PlaceholderText="Enter Game Name" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel>
+                    <TextBlock Text="Choose Game Type"/>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton x:Name="Leaderboard" Content="Leaderboard" GroupName="GameType" Checked="RadioButtonChecked"/>
-                        <RadioButton x:Name="Elimiator" Content="Eliminator" GroupName="GameType" Checked="RadioButtonChecked"/>
+                        <RadioButton x:Name="Leaderboard" Content="Leaderboard" Checked="GameType_Checked"/>
+                        <RadioButton x:Name="Eliminator" Content="Eliminator" Checked="GameType_Checked"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="30">
                     <TextBlock Text="Number of players: " FontSize="28"/>
-                    <TextBox x:Name="NumInput" BeforeTextChanging="NumInput_Validate"/>
+                    <TextBox x:Name="NumInput" BeforeTextChanging="NumInput_BeforeTextChanging" />
                 </StackPanel>
                 <Button x:Name="CreateGameButton" Content="Submit" Click="CreateGameButton_Click"/>
             </StackPanel>
         </StackPanel>
-
-        <ContentDialog Title="Enter Player Names" x:Name="NamesDialog" PrimaryButtonText="Save" PrimaryButtonClick="NamesDialog_PrimaryButtonClick" CloseButtonText="Cancel">
-            <ListView ItemsSource="{x:Bind PlayerStats}">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="data:PlayerStat">
-                        <TextBox PlaceholderText="Enter name" Text="{x:Bind PlayerName, Mode=TwoWay}" Width="250"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ContentDialog>
-
-        <CommandBar Grid.Row="1">
-            <AppBarButton x:Name="SettingsButton" Label="Settings" Icon="Setting" Click="SettingsButton_Click"/>
-            <AppBarButton x:Name="HelpButton" Label="Help" Icon="Help" Click="HelpButton_Click"/>
-        </CommandBar>
     </Grid>
 </Page>
