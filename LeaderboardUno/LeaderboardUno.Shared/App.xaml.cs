@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,14 @@ namespace LeaderboardUno
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            object value = ApplicationData.Current.LocalSettings.Values["themeSetting"];
+
+            if (value != null)
+            {
+                // Apply theme choice.
+                App.Current.RequestedTheme = (ApplicationTheme)(int)value;
+            }
         }
 
         /// <summary>

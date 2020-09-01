@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="LeaderboardUno.Shared.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeaderboardUno.Shared"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="WrapStyle">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Help" FontSize="50" Margin="20,0,0,20"/>
+
+        <StackPanel x:Name="HelpPanel" Grid.Row="1" Margin="20,0,0,20">
+            <StackPanel Margin="20,0,0,20">
+                <TextBlock Text="How do I change the app theme?" FontWeight="SemiBold" Style="{StaticResource WrapStyle}" FontSize="20" Margin="0,0,0,10" FontStyle="Italic"/>
+                <TextBlock Text="You can change the app theme in settings. You can visit the Settings page from any page via the app bar at the bottom." Style="{StaticResource WrapStyle}" FontSize="20"/>
+            </StackPanel>
+            <StackPanel Margin="20,0,0,20">
+                <TextBlock Text="I've added a game, but I cannot find it in the Navigation Bar." FontWeight="SemiBold" Style="{StaticResource WrapStyle}" FontSize="20" Margin="0,0,0,10" FontStyle="Italic"/>
+                <TextBlock Text="Sometimes, the app might load before all the games are instantiated. Try hitting the refresh button located at the bottom left of the Navigation Bar." Style="{StaticResource WrapStyle}" FontSize="20"/>
+            </StackPanel>
+        </StackPanel>
+
+        <CommandBar Grid.Row="2">
+            <AppBarButton x:Name="HomeButton" Label="Home" Icon="Home" Click="HomeButton_Click"/>
+            <AppBarButton x:Name="SettingButton" Label="Settings" Icon="Setting" Click="SettingButton_Click"/>
+        </CommandBar>
+    </Grid>
+</Page>

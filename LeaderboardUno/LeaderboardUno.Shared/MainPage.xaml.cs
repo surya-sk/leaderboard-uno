@@ -41,7 +41,7 @@ namespace LeaderboardUno
 
         private void NavigationViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            //ContentFrame.Navigate(typeof(Leaderboard));
+            ContentFrame.Navigate(typeof(Leaderboard));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,9 +56,9 @@ namespace LeaderboardUno
 
         private void NavView_ItemInvoked(Windows.UI.Xaml.Controls.NavigationView sender, Windows.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            //NavigationViewItem SelectedItem = args.InvokedItem as NavigationViewItem;
-            //SelectedItem.IsSelected = true;
-            //ContentFrame.Navigate(typeof(Leaderboard), SelectedItem.Tag);
+            string id = args.InvokedItemContainer.Tag.ToString();
+            Guid guid = new Guid(id);
+            ContentFrame.Navigate(typeof(Leaderboard), guid);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

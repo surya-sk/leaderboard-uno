@@ -53,5 +53,10 @@
                 <Button x:Name="ActualCreateGameButton" Content="Create Game" Click="ActualCreateGameButton_Click"/>
             </StackPanel>
         </StackPanel>
+
+        <CommandBar Grid.Row="1">
+            <AppBarButton x:Name="SettingsButton" Label="Settings" Icon="Setting" Click="SettingsButton_Click"/>
+            <AppBarButton x:Name="HelpButton" Label="Help" Icon="Help" Click="HelpButton_Click"/>
+        </CommandBar>
     </Grid>
 </Page>
