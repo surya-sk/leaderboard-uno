@@ -32,7 +32,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Game.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerStat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GameRound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Profile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>

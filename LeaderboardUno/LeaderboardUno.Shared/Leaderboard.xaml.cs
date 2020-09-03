@@ -24,7 +24,7 @@ namespace LeaderboardUno.Shared
     /// </summary>
     public sealed partial class Leaderboard : Page
     {
-        private ObservableCollection<PlayerStat> playerStats;
+        private ObservableCollection<Player> players;
         private ObservableCollection<Game> games;
         private Game game;
         Guid guid;
@@ -39,10 +39,10 @@ namespace LeaderboardUno.Shared
             guid = (Guid)e.Parameter;
             for (int i = 0; i < games.Count; i++)
             {
-                if (games[i].id == guid)
+                if (games[i].Id == guid)
                 {
                     game = games[i];
-                    playerStats = game.PlayerStatList;
+                    players = game.Players;
                     GameName.Text = game.GameName;
                 }
             }
@@ -61,10 +61,10 @@ namespace LeaderboardUno.Shared
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            game.PlayerStatList = playerStats;
+            game.Players = players;
             for (int i = 0; i < games.Count; i++)
             {
-                if (games[i].id == guid)
+                if (games[i].Id == guid)
                 {
                     games[i] = game;
                 }
@@ -100,6 +100,14 @@ namespace LeaderboardUno.Shared
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(HelpPage));
+        }
+
+        private void AddRound_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].GameRounds.Add(new GameRound() { RoundName = "Round " + (players[i].GameRounds.Count + 1), score = 0 });
+            }
         }
     }
 }

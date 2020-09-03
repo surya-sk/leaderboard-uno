@@ -26,12 +26,15 @@ namespace LeaderboardUno.Shared
     {
         string GameName, Type;
         double Num;
-        private ObservableCollection<PlayerStat> PlayerStats;
+        int MaxScore;
         private ObservableCollection<Game> games;
+        private ObservableCollection<GameRound> GameRounds;
+        private ObservableCollection<Player> Players;
         public Homepage()
         {
             this.InitializeComponent();
-            PlayerStats = PlayerStatList.GetPlayerStats();
+            GameRounds = GameRoundsList.GetGameRounds();
+            Players = PlayerList.GetPlayers();
         }
 
         private void InputGame_Click(object sender, RoutedEventArgs e)
@@ -51,7 +54,9 @@ namespace LeaderboardUno.Shared
             GameName = NameInput.Text;
             string temp = NumInput.Text;
             Num = Convert.ToDouble(temp);
-            CreatePlayerStats();
+            string temp2 = MaxScoreInput.Text;
+            MaxScore = Convert.ToInt16(temp2);
+            CreatePlayerList();
             InputPlayers();
             //this.Frame.Navigate(typeof(Homepage));
             //this.Frame.Navigate(typeof(Leaderboard));
@@ -67,17 +72,22 @@ namespace LeaderboardUno.Shared
 
         private void ActualCreateGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Game game = new Game() { id = Guid.NewGuid(), GameName = GameName, GameType = Type, NumPlayers = Num, PlayerStatList = PlayerStats };
+            Game game = new Game() { Id = Guid.NewGuid(), GameName = GameName, GameType = Type, NumPlayers = Num, MaxScore = MaxScore, Players = Players };
             Profile.GetInstance().AddGame(game);
             InputPanel.Visibility = Visibility.Collapsed;
             InputGame.Visibility = Visibility.Visible;
         }
-
-        private void CreatePlayerStats()
+        private void CreateRoundOne()
         {
+            GameRounds.Add(new GameRound { RoundName = "Round " + (GameRounds.Count + 1), score = 0 });
+        }
+
+        private void CreatePlayerList()
+        {
+            CreateRoundOne();
             for (int i = 0; i < Num; i++)
             {
-                PlayerStats.Add(new PlayerStat { PlayerName = "", PlayerScore = 0 });
+                Players.Add(new Player { PlayerName = "", GameRounds = GameRounds });
             }
         }
 

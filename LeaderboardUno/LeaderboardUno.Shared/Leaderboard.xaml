@@ -24,27 +24,71 @@
             <TextBlock x:Name="GameName" FontSize="40" />
         </Grid>
 
-        <ListView ItemsSource="{x:Bind playerStats}" Grid.Row="1" Margin="20,0,0,20">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:PlayerStat">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Bind PlayerName}" />
-                        <TextBox Text="{x:Bind PlayerScore, Mode=TwoWay}" Grid.Column="1"/>
-                    </Grid>
+        <!--<Pivot x:Name="PivotControl" Grid.Row="1" ItemsSource="{x:Bind players}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="data:Player">
+                    <TextBlock Text="{x:Bind PlayerName}" />
                 </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="data:Player">
+                    <ListView ItemsSource="{x:Bind GameRounds}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:GameRound">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{x:Bind RoundName}" />
+                                    <TextBox Text="{x:Bind score, Mode=TwoWay}" Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>-->
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ListView ItemsSource="{x:Bind players}" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Player">
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="{x:Bind PlayerName}"/>
+                            <ListView ItemsSource="{x:Bind GameRounds}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="data:GameRound">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{x:Bind RoundName}" />
+                                            <TextBox Text="{x:Bind score, Mode=TwoWay}" Grid.Column="1"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+
 
         <CommandBar Grid.Row="2">
+            <AppBarButton x:Name="AddRound" Label="Add round" Icon="Add" Click="AddRound_Click"/>
             <AppBarButton x:Name="HomeButton" Label="Home" Icon="Home" Click="HomeButton_Click"/>
             <AppBarButton x:Name="SaveButton" Label="Save" Icon="Save" Click="SaveButton_Click"/>
             <AppBarButton x:Name="DeleteButton" Label="Delete" Icon="Delete" Click="DeleteButton_Click"/>

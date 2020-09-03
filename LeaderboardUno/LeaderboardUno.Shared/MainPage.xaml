@@ -15,17 +15,21 @@
             Name="NavView" 
             PaneTitle="Games" 
             PaneDisplayMode="Auto" 
-            ItemInvoked="NavView_ItemInvoked"
-            IsSettingsVisible="False"
-            MenuItemsSource="{x:Bind games}">
-            <NavigationView.MenuItemTemplate>
-                <DataTemplate x:DataType="data:Game">
-                    <NavigationViewItem Tag="{x:Bind id}" Content="{x:Bind GameName}" Icon="Play"/>
-                </DataTemplate>
-            </NavigationView.MenuItemTemplate>
+            IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <ListView ItemsSource="{x:Bind games}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Game">
+                            <Button Content="{x:Bind GameName}" Tag="{x:Bind Id}" Click="Test_Click"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </NavigationView.MenuItems>
+           
             <Frame Name="ContentFrame" Margin="0,20,0,0"/>
         </NavigationView>
         <Button 
+            x:Name="RefreshButton"
             Click="Button_Click"
             FontFamily="Segoe MDL2 Assets" 
             Content="&#xE72C;" 

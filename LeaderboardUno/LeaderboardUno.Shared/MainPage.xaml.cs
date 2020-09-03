@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Controls;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -39,10 +40,6 @@ namespace LeaderboardUno
         }
 
 
-        private void NavigationViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            ContentFrame.Navigate(typeof(Leaderboard));
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -54,12 +51,18 @@ namespace LeaderboardUno
             Frame.Navigate(typeof(MainPage));
         }
 
-        private void NavView_ItemInvoked(Windows.UI.Xaml.Controls.NavigationView sender, Windows.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
-        {
-            string id = args.InvokedItemContainer.Tag.ToString();
-            Guid guid = new Guid(id);
-            ContentFrame.Navigate(typeof(Leaderboard), guid);
-        }
+        //private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        //{
+        //    TextBlock ItemContent = args.InvokedItem as TextBlock;
+        //    if(ItemContent==null)
+        //    {
+        //        RefreshButton.Content += "Hello";
+        //    }
+        //    else
+        //    {
+        //        ContentFrame.Navigate(typeof(Leaderboard), new Guid(ItemContent.Tag.ToString()));
+        //    }
+        //}
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -73,6 +76,12 @@ namespace LeaderboardUno
         {
             this.games = games;
             //Debug.WriteLine("Mainpage" + games.Count);
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            ContentFrame.Navigate(typeof(Leaderboard), new Guid(button.Tag.ToString()));
         }
     }
 }
