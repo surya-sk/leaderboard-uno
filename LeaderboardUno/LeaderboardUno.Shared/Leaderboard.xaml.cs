@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,26 +29,17 @@ namespace LeaderboardUno.Shared
         private ObservableCollection<Game> games;
         private Game game;
         Guid guid;
+        public static string resultId;
+        public ObservableCollection<Player> Players { get => players; set => players = value; }
+
         public Leaderboard()
         {
             games = Profile.GetInstance().GetGamesList();
             this.InitializeComponent();
+            DataContext = Players;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            guid = (Guid)e.Parameter;
-            for (int i = 0; i < games.Count; i++)
-            {
-                if (games[i].Id == guid)
-                {
-                    game = games[i];
-                    players = game.Players;
-                    GameName.Text = game.GameName;
-                }
-            }
-            base.OnNavigatedTo(e);
-        }
+
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +53,7 @@ namespace LeaderboardUno.Shared
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            game.Players = players;
+            game.Players = Players;
             for (int i = 0; i < games.Count; i++)
             {
                 if (games[i].Id == guid)
@@ -104,9 +96,24 @@ namespace LeaderboardUno.Shared
 
         private void AddRound_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < players.Count; i++)
+            for (int i = 0; i < Players.Count; i++)
             {
-                players[i].GameRounds.Add(new GameRound() { RoundName = "Round " + (players[i].GameRounds.Count + 1), score = 0 });
+                Players[i].GameRounds.Add(new GameRound() { RoundName = "Round " + (Players[i].GameRounds.Count + 1), score = 0 });
+            }
+        }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Page Loaded" + resultId);
+            guid = new Guid(resultId);
+            for (int i = 0; i < games.Count; i++)
+            {
+                if (games[i].Id == guid)
+                {
+                    game = games[i];
+                    Players = game.Players;
+                    GameName.Text = game.GameName;
+                }
             }
         }
     }

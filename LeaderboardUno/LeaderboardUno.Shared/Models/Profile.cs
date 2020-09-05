@@ -12,8 +12,7 @@ namespace LeaderboardUno.Shared.Models
     {
         private static Profile instance = new Profile();
         private ObservableCollection<Game> GamesList = null;
-        ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
-        StorageFolder roamingFolder = ApplicationData.Current.RoamingFolder;
+        StorageFolder resultFolder = ApplicationData.Current.LocalFolder;
         List<UpdateEvent> events;
         string fileName = "games.txt";
 
@@ -27,20 +26,11 @@ namespace LeaderboardUno.Shared.Models
             return instance;
         }
 
-        void InitHandlers()
-        {
-            ApplicationData.Current.DataChanged += new TypedEventHandler<ApplicationData, object>(DataChangeHandler);
-        }
-
-        void DataChangeHandler(ApplicationData appData, object o)
-        {
-            SaveSettings(GamesList);
-        }
 
         public async void WriteProfile()
         {
             string json = JsonConvert.SerializeObject(GamesList);
-            StorageFile storageFile = await roamingFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            StorageFile storageFile = await resultFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(storageFile, json);
         }
 
@@ -53,7 +43,7 @@ namespace LeaderboardUno.Shared.Models
         {
             try
             {
-                StorageFile storageFile = await roamingFolder.GetFileAsync(fileName);
+                StorageFile storageFile = await resultFolder.GetFileAsync(fileName);
                 string json = await FileIO.ReadTextAsync(storageFile);
                 GamesList = JsonConvert.DeserializeObject<ObservableCollection<Game>>(json);
                 FireEvents();

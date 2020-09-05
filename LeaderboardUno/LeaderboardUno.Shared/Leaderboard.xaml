@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:LeaderboardUno.Shared.Models"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="PageLoaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -55,8 +56,7 @@
             </Pivot.ItemTemplate>
         </Pivot>-->
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ListView ItemsSource="{x:Bind players}" SelectionMode="None">
+            <ListView ItemsSource="{x:Bind Players}" SelectionMode="None" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:Player">
                         <StackPanel Margin="0,0,0,20">
@@ -84,7 +84,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </ScrollViewer>
+        
 
 
         <CommandBar Grid.Row="2">

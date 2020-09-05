@@ -20,7 +20,12 @@
                 <ListView ItemsSource="{x:Bind games}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="data:Game">
-                            <Button Content="{x:Bind GameName}" Tag="{x:Bind Id}" Click="Test_Click"/>
+                            <Button Tag="{x:Bind Id}" Click="Test_Click">
+                                <RelativePanel>
+                                    <FontIcon x:Name="GameIcon" Glyph="&#xE768;"/>
+                                    <TextBlock Text="{x:Bind GameName}" RelativePanel.RightOf="GameIcon"/>
+                                </RelativePanel>
+                            </Button>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

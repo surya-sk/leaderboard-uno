@@ -81,7 +81,8 @@ namespace LeaderboardUno
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            ContentFrame.Navigate(typeof(Leaderboard), new Guid(button.Tag.ToString()));
+            Leaderboard.resultId = button.Tag.ToString();
+            ContentFrame.Navigate(typeof(Leaderboard));
         }
     }
 }
