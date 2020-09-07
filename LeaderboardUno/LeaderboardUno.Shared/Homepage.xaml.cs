@@ -79,7 +79,7 @@ namespace LeaderboardUno.Shared
         }
         private void CreateRoundOne()
         {
-            GameRounds.Add(new GameRound { RoundName = "Round " + (GameRounds.Count + 1), score = 0 });
+            GameRounds.Add(new GameRound { RoundName = "Round " + (GameRounds.Count + 1), Score = 0, IsReadOnly = false });
         }
 
         private void CreatePlayerList()

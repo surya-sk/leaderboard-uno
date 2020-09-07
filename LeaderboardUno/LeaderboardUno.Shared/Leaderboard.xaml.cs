@@ -96,9 +96,14 @@ namespace LeaderboardUno.Shared
 
         private void AddRound_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < Players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                Players[i].GameRounds.Add(new GameRound() { RoundName = "Round " + (Players[i].GameRounds.Count + 1), score = 0 });
+                GameRound gameRound = new GameRound() { RoundName = "Round " + (players[i].GameRounds.Count + 1), Score = 0, IsReadOnly = false };
+                players[i].GameRounds.Add(gameRound);
+                for (int j = 0; j < players[i].GameRounds.Count - 1; j++)
+                {
+                    players[i].GameRounds[j].IsReadOnly = true;
+                }
             }
         }
 
@@ -113,6 +118,17 @@ namespace LeaderboardUno.Shared
                     game = games[i];
                     Players = game.Players;
                     GameName.Text = game.GameName;
+                }
+            }
+        }
+
+        private void ScoreTextBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            foreach (char c in args.NewText)
+            {
+                if (!char.IsDigit(c))
+                {
+                    args.Cancel = true;
                 }
             }
         }
